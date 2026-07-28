@@ -607,8 +607,94 @@ ul {
 .about-text {
   font-size: 1.05rem;
   color: var(--color-text-secondary);
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   line-height: 1.8;
+}
+
+.about-mission-block {
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid var(--color-border);
+}
+
+.about-mission-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.about-vision-mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.about-vision-card,
+.about-mission-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  transition: var(--transition);
+}
+
+.about-vision-card:hover,
+.about-mission-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.about-vision-card h4,
+.about-mission-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--color-primary);
+}
+
+.about-vision-card p {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+.about-mission-list {
+  list-style: none;
+}
+
+.about-mission-list li {
+  padding: 10px 0;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.about-mission-list li:last-child {
+  border-bottom: none;
+}
+
+.about-mission-list li strong {
+  color: var(--color-text);
+}
+
+.about-closing {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.about-closing-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 16px;
 }
 
 .about-features {
@@ -1415,6 +1501,10 @@ ul {
   .about-image-col {
     max-width: 500px;
     margin: 0 auto;
+  }
+
+  .about-vision-mission-grid {
+    grid-template-columns: 1fr;
   }
 
   .programs-grid {
