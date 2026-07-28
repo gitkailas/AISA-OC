@@ -35,7 +35,7 @@
 
   /* Section backgrounds */
   --section-about: #f4f6f9;
-  --section-pillars: #F8FAFB;
+  --section-pillars: #eef1f7;
   --section-programs: #FFFFFF;
   --section-testimonials: #f4f6f9;
   --section-contact: #FFFFFF;
@@ -745,7 +745,11 @@ ul {
 /* ======================== SCROLLTELLING SECTION ======================== */
 .pillars-section {
   padding: 100px 0 60px;
-  background: var(--color-bg);
+  background: var(--section-pillars);
+}
+
+.pillars-section .section-title {
+  white-space: nowrap;
 }
 
 .pillars-grid {
