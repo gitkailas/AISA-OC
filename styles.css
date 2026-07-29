@@ -1654,6 +1654,10 @@ ul {
   .newsletter-form {
     flex-direction: column;
   }
+
+  .pillars-section .section-title {
+    white-space: normal;
+  }
 }
 
 /* ======================== RESPONSIVE – SMALL MOBILE ======================== */
