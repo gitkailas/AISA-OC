@@ -13,6 +13,7 @@ body{overflow-x:hidden}
 .about-join{padding-top:clamp(4rem,7vw,7rem);padding-bottom:clamp(4rem,7vw,7rem)}.about-join .eyebrow{position:relative;top:auto;left:auto;margin:0;transform:none;white-space:normal;color:#6a7280}.about-join h2{padding-top:0}.about-join .cta-orb{position:absolute;z-index:0;top:0;transform:translate(-50%,-42%)}
 .services-join{padding-top:clamp(4rem,7vw,7rem);padding-bottom:clamp(4rem,7vw,7rem)}.services-join .cta-orb{position:absolute;z-index:0;top:0;transform:translate(-50%,-42%)}
 .photo-card-bg{background-image:linear-gradient(0deg,rgba(8,17,34,.9),rgba(8,17,34,.05)),url("images/content/career-skills.png")}
+.promise-list li:before{content:none}
 @media(max-width:760px){.intro.home-slide>.home-slide-inner,.journey.home-slide>.home-slide-inner{grid-template-columns:1fr}}
 
 /* Dedicated about page */
