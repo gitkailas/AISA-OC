@@ -26,6 +26,39 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from('.hero-bottom, .hero .scroll-cue', { y: 22, opacity: 0, duration: .8, stagger: .12, delay: .8 });
     ScrollTrigger.create({ trigger: homeHero, start: 'bottom 90%', onEnter: () => nav?.classList.add('visible'), onLeaveBack: () => nav?.classList.remove('visible') });
     gsap.to('.hero-image', { yPercent: 16, ease: 'none', scrollTrigger: { trigger: homeHero, start: 'top top', end: 'bottom top', scrub: true } });
+
+    // Wrap each major home panel so its content can overscroll while the panel pins and yields to the next slide.
+    gsap.utils.toArray('.home-slide').forEach(panel => {
+      const inner = document.createElement('div');
+      inner.className = 'home-slide-inner';
+      while (panel.firstChild) inner.appendChild(panel.firstChild);
+      panel.appendChild(inner);
+    });
+
+    gsap.utils.toArray('.home-slide').forEach(panel => {
+      const innerPanel = panel.querySelector('.home-slide-inner');
+      const panelHeight = innerPanel.scrollHeight;
+      const windowHeight = window.innerHeight;
+      const difference = panelHeight - windowHeight;
+      const fakeScrollRatio = difference > 0 ? difference / (difference + windowHeight) : 0;
+
+      if (fakeScrollRatio) panel.style.marginBottom = `${panelHeight * fakeScrollRatio}px`;
+
+      const slideTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: panel,
+          start: 'bottom bottom',
+          end: () => fakeScrollRatio ? `+=${innerPanel.offsetHeight}` : 'bottom top',
+          pin: true,
+          pinSpacing: false,
+          scrub: true
+        }
+      });
+
+      if (fakeScrollRatio) slideTimeline.to(innerPanel, { yPercent: -100, y: windowHeight, duration: 1 / (1 - fakeScrollRatio) - 1, ease: 'none' });
+      slideTimeline.fromTo(panel, { scale: 1, opacity: 1 }, { scale: .7, opacity: .5, duration: .9 }).to(panel, { opacity: 0, duration: .1 });
+    });
+    ScrollTrigger.refresh();
   }
 
   if (aboutHero) {
