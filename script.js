@@ -62,10 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (aboutHero) {
-    nav?.classList.add('visible');
-    gsap.from('.about-hero-top, .about-hero .eyebrow', { y: 18, opacity: 0, duration: .8, stagger: .12, delay: .15 });
+    ScrollTrigger.create({ trigger: aboutHero, start: 'bottom 90%', onEnter: () => nav?.classList.add('visible'), onLeaveBack: () => nav?.classList.remove('visible') });
+    gsap.from('.about-hero-top', { y: 18, opacity: 0, duration: .8, stagger: .12, delay: .15 });
     gsap.from('.about-hero h1', { y: 65, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .25 });
-    gsap.from('.about-intro, .about-hero .scroll-cue', { y: 24, opacity: 0, duration: .8, stagger: .12, delay: .72 });
+    gsap.from('.about-intro', { y: 24, opacity: 0, duration: .8, stagger: .12, delay: .72 });
     gsap.to('.about-hero-image', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: aboutHero, start: 'top top', end: 'bottom top', scrub: true } });
     document.querySelectorAll('.about-panel').forEach(section => {
       gsap.from(section.querySelectorAll('h2, h3, .eyebrow, p, .mission-list'), { y: 34, opacity: 0, duration: .75, stagger: .08, ease: 'power2.out', scrollTrigger: { trigger: section, start: 'top 75%' } });
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (servicesHero) {
-    nav?.classList.add('visible');
+    ScrollTrigger.create({ trigger: servicesHero, start: 'bottom 90%', onEnter: () => nav?.classList.add('visible'), onLeaveBack: () => nav?.classList.remove('visible') });
     gsap.from('.services-hero-top, .services-hero .eyebrow', { y: 18, opacity: 0, duration: .8, stagger: .12, delay: .15 });
     gsap.from('.services-hero h1', { y: 65, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .25 });
     gsap.from('.services-hero-bottom, .services-hero .scroll-cue', { y: 24, opacity: 0, duration: .8, stagger: .12, delay: .72 });
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.services-panel:not(.skill-areas)').forEach(section => {
       gsap.from(section.querySelectorAll('h2, h3, .eyebrow, p, ul, .package-meta, a, small'), { y: 32, opacity: 0, duration: .72, stagger: .06, ease: 'power2.out', scrollTrigger: { trigger: section, start: 'top 76%' } });
     });
-    if (document.querySelector('.skill-area')) gsap.from('.skill-area', { y: 42, opacity: 0, duration: .7, stagger: .1, ease: 'power2.out', scrollTrigger: { trigger: '.skill-areas', start: 'top 76%' } });
+    if (document.querySelector('.skill-area')) gsap.from('.skill-area', { opacity: 0, duration: .45, stagger: .06, ease: 'power2.out', scrollTrigger: { trigger: '.skill-areas', start: 'top 76%' } });
   }
 
   document.querySelectorAll('.panel:not(.final-cta):not(.about-panel):not(.services-panel)').forEach(section => {
