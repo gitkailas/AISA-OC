@@ -2,8 +2,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   const nav = document.querySelector('.site-nav');
   const homeHero = document.querySelector('.hero');
+  const homeHeading = document.querySelector('#hero-heading');
   const aboutHero = document.querySelector('.about-hero');
   const servicesHero = document.querySelector('.services-hero');
+  const heroLogo = document.querySelector('.hero-logo');
+  const whatsappButton = document.querySelector('.whatsapp-float');
+  const homeSupportingCopy = document.querySelector('.hero-bottom p');
   const menu = document.querySelector('.menu-toggle');
   const links = document.querySelectorAll('.nav-links a');
 
@@ -12,9 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
     menu.setAttribute('aria-expanded', open);
   });
   links.forEach(link => link.addEventListener('click', () => nav.classList.remove('menu-open')));
+  if (homeSupportingCopy) {
+    homeSupportingCopy.className = 'hero-supporting-copy';
+    homeSupportingCopy.innerHTML = '<span>The world has always had room for people who are ready for it.</span><span>AISA gives you exactly that - the skills, the confidence, the communication, and the clarity to walk into any room, any country, any opportunity, and belong there.</span>';
+    homeSupportingCopy.insertAdjacentHTML('afterend', '<p class="hero-side-message"><span>The world doesn\'t grade on effort.</span><span>It rewards readiness.</span></p>');
+  }
+  if (homeHeading) homeHeading.innerHTML = homeHeading.innerHTML.replace('<br>Neither should you.', '<span class="hero-conclusion">Neither should you.</span>');
+  const setNavigationState = visible => {
+    nav?.classList.toggle('visible', visible);
+    heroLogo?.classList.toggle('is-hidden', visible);
+    whatsappButton?.classList.toggle('is-hidden', !visible);
+  };
 
   if (!window.gsap) {
-    nav?.classList.add('visible');
+    setNavigationState(true);
     return;
   }
 
@@ -23,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (homeHero) {
     gsap.from('.hero-top, .hero .eyebrow', { y: 18, opacity: 0, duration: .8, stagger: .12, delay: .15 });
     gsap.from('.hero h1', { y: 65, opacity: 0, duration: 1.15, ease: 'power3.out', delay: .25 });
-    gsap.from('.hero-bottom, .hero .scroll-cue', { y: 22, opacity: 0, duration: .8, stagger: .12, delay: .8 });
-    ScrollTrigger.create({ trigger: homeHero, start: 'bottom 90%', onEnter: () => nav?.classList.add('visible'), onLeaveBack: () => nav?.classList.remove('visible') });
+    gsap.from('.hero-supporting-copy span, .hero-side-message span, .hero .scroll-cue', { y: 22, opacity: 0, duration: .8, stagger: .16, delay: .8, ease: 'power3.out' });
+    ScrollTrigger.create({ trigger: homeHero, start: 'bottom 90%', onEnter: () => setNavigationState(true), onLeaveBack: () => setNavigationState(false) });
     gsap.to('.hero-image', { yPercent: 16, ease: 'none', scrollTrigger: { trigger: homeHero, start: 'top top', end: 'bottom top', scrub: true } });
 
     // Wrap each major home panel so its content can overscroll while the panel pins and yields to the next slide.
@@ -62,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (aboutHero) {
-    ScrollTrigger.create({ trigger: aboutHero, start: 'bottom 90%', onEnter: () => nav?.classList.add('visible'), onLeaveBack: () => nav?.classList.remove('visible') });
+    ScrollTrigger.create({ trigger: aboutHero, start: 'bottom 90%', onEnter: () => setNavigationState(true), onLeaveBack: () => setNavigationState(false) });
     gsap.from('.about-hero-top', { y: 18, opacity: 0, duration: .8, stagger: .12, delay: .15 });
     gsap.from('.about-hero h1', { y: 65, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .25 });
     gsap.from('.about-intro', { y: 24, opacity: 0, duration: .8, stagger: .12, delay: .72 });
@@ -73,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (servicesHero) {
-    ScrollTrigger.create({ trigger: servicesHero, start: 'bottom 90%', onEnter: () => nav?.classList.add('visible'), onLeaveBack: () => nav?.classList.remove('visible') });
+    ScrollTrigger.create({ trigger: servicesHero, start: 'bottom 90%', onEnter: () => setNavigationState(true), onLeaveBack: () => setNavigationState(false) });
     gsap.from('.services-hero-top, .services-hero .eyebrow', { y: 18, opacity: 0, duration: .8, stagger: .12, delay: .15 });
     gsap.from('.services-hero h1', { y: 65, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .25 });
     gsap.from('.services-hero-bottom, .services-hero .scroll-cue', { y: 24, opacity: 0, duration: .8, stagger: .12, delay: .72 });
