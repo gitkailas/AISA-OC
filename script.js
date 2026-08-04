@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from(section.querySelectorAll('h2, .eyebrow, .intro-lead, .promise-list, .section-heading, .journey-heading'), { y: 38, opacity: 0, duration: .8, stagger: .1, ease: 'power2.out', scrollTrigger: { trigger: section, start: 'top 75%' } });
   });
   if (document.querySelector('.portrait-image')) gsap.from('.portrait-image', { clipPath: 'inset(0 0 100% 0)', duration: 1.2, ease: 'power3.inOut', scrollTrigger: { trigger: '.intro', start: 'top 65%' } });
-  if (document.querySelector('.pillar-card')) gsap.from('.pillar-card', { y: 50, opacity: 0, duration: .75, stagger: .12, scrollTrigger: { trigger: '.pillar-grid', start: 'top 77%' } });
+  if (document.querySelector('.pillar-card')) gsap.from('.pillar-card', { opacity: 0, duration: .6, stagger: .08, scrollTrigger: { trigger: '.pillar-grid', start: 'top 77%' } });
   if (document.querySelector('.marquee-track')) gsap.to('.marquee-track', { xPercent: -33.33, duration: 18, ease: 'none', repeat: -1 });
   if (document.querySelector('.step')) gsap.from('.step', { x: 45, opacity: 0, duration: .65, stagger: .13, scrollTrigger: { trigger: '.steps', start: 'top 75%' } });
   if (document.querySelector('.final-cta')) gsap.from('.final-cta > :not(.cta-orb)', { y: 30, opacity: 0, duration: .8, stagger: .1, scrollTrigger: { trigger: '.final-cta', start: 'top 68%' } });
