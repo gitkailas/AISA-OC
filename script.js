@@ -51,9 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       panel.appendChild(inner);
     });
 
-    const pinnedHomeSlides = window.matchMedia('(max-width: 760px)').matches
-      ? homeSlides.filter(panel => panel.classList.contains('hero'))
-      : homeSlides;
+    const pinnedHomeSlides = homeSlides.filter(panel => panel.classList.contains('hero'));
 
     pinnedHomeSlides.forEach(panel => {
       const innerPanel = panel.querySelector('.home-slide-inner');
@@ -102,10 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from('.services-hero h1', { y: 65, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .25 });
     gsap.from('.services-hero-bottom, .services-hero .scroll-cue', { y: 24, opacity: 0, duration: .8, stagger: .12, delay: .72 });
     gsap.to('.services-hero-image', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: servicesHero, start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.timeline({
-      scrollTrigger: { trigger: servicesHero, start: 'bottom bottom', end: 'bottom top', pin: true, pinSpacing: false, scrub: true }
-    }).fromTo(servicesHero, { scale: 1, opacity: 1 }, { scale: .7, opacity: .5, duration: .9 })
-      .to(servicesHero, { opacity: 0, duration: .1 });
+    if (!window.matchMedia('(max-width: 760px)').matches) {
+      gsap.timeline({
+        scrollTrigger: { trigger: servicesHero, start: 'bottom bottom', end: 'bottom top', pin: true, pinSpacing: false, scrub: true }
+      }).fromTo(servicesHero, { scale: 1, opacity: 1 }, { scale: .7, opacity: .5, duration: .9 })
+        .to(servicesHero, { opacity: 0, duration: .1 });
+    }
     document.querySelectorAll('.services-panel:not(.skill-areas)').forEach(section => {
       gsap.from(section.querySelectorAll('h2, h3, .eyebrow, p, ul, .package-meta, a, small'), { y: 32, opacity: 0, duration: .72, stagger: .06, ease: 'power2.out', scrollTrigger: { trigger: section, start: 'top 76%' } });
     });
