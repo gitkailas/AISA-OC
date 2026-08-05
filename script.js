@@ -82,6 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from('.about-hero h1', { y: 65, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .25 });
     gsap.from('.about-intro', { y: 24, opacity: 0, duration: .8, stagger: .12, delay: .72 });
     gsap.to('.about-hero-image', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: aboutHero, start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.timeline({
+      scrollTrigger: { trigger: aboutHero, start: 'bottom bottom', end: 'bottom top', pin: true, pinSpacing: false, scrub: true }
+    }).fromTo(aboutHero, { scale: 1, opacity: 1 }, { scale: .7, opacity: .5, duration: .9 })
+      .to(aboutHero, { opacity: 0, duration: .1 });
     document.querySelectorAll('.about-panel').forEach(section => {
       gsap.from(section.querySelectorAll('h2, h3, .eyebrow, p, .mission-list'), { y: 34, opacity: 0, duration: .75, stagger: .08, ease: 'power2.out', scrollTrigger: { trigger: section, start: 'top 75%' } });
     });
@@ -93,6 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from('.services-hero h1', { y: 65, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .25 });
     gsap.from('.services-hero-bottom, .services-hero .scroll-cue', { y: 24, opacity: 0, duration: .8, stagger: .12, delay: .72 });
     gsap.to('.services-hero-image', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: servicesHero, start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.timeline({
+      scrollTrigger: { trigger: servicesHero, start: 'bottom bottom', end: 'bottom top', pin: true, pinSpacing: false, scrub: true }
+    }).fromTo(servicesHero, { scale: 1, opacity: 1 }, { scale: .7, opacity: .5, duration: .9 })
+      .to(servicesHero, { opacity: 0, duration: .1 });
     document.querySelectorAll('.services-panel:not(.skill-areas)').forEach(section => {
       gsap.from(section.querySelectorAll('h2, h3, .eyebrow, p, ul, .package-meta, a, small'), { y: 32, opacity: 0, duration: .72, stagger: .06, ease: 'power2.out', scrollTrigger: { trigger: section, start: 'top 76%' } });
     });
