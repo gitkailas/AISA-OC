@@ -43,14 +43,19 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.to('.hero-image', { yPercent: 16, ease: 'none', scrollTrigger: { trigger: homeHero, start: 'top top', end: 'bottom top', scrub: true } });
 
     // Wrap each major home panel so its content can overscroll while the panel pins and yields to the next slide.
-    gsap.utils.toArray('.home-slide').forEach(panel => {
+    const homeSlides = gsap.utils.toArray('.home-slide');
+    homeSlides.forEach(panel => {
       const inner = document.createElement('div');
       inner.className = 'home-slide-inner';
       while (panel.firstChild) inner.appendChild(panel.firstChild);
       panel.appendChild(inner);
     });
 
-    gsap.utils.toArray('.home-slide').forEach(panel => {
+    const pinnedHomeSlides = window.matchMedia('(max-width: 760px)').matches
+      ? homeSlides.filter(panel => panel.classList.contains('hero'))
+      : homeSlides;
+
+    pinnedHomeSlides.forEach(panel => {
       const innerPanel = panel.querySelector('.home-slide-inner');
       const panelHeight = innerPanel.scrollHeight;
       const windowHeight = window.innerHeight;
