@@ -112,4 +112,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const target = document.querySelector(a.getAttribute('href'));
     if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
   }));
+
+  const contactForm = document.querySelector('#contact-form');
+  if (contactForm) {
+    const status = contactForm.querySelector('.form-status');
+    contactForm.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
+      const name = contactForm.elements.name.value.trim();
+      status.textContent = `Thank you, ${name}. We will be in touch soon.`;
+      contactForm.reset();
+    });
+  }
 });
