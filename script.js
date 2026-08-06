@@ -36,6 +36,20 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
   if (homeHero) {
+    const heroImage = homeHero.querySelector('.hero-image');
+    if (heroImage && window.matchMedia('(pointer: fine)').matches) {
+      homeHero.addEventListener('pointermove', event => {
+        const bounds = homeHero.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - .5;
+        const y = (event.clientY - bounds.top) / bounds.height - .5;
+        heroImage.style.setProperty('--hero-depth-x', `${x * -16}px`);
+        heroImage.style.setProperty('--hero-depth-y', `${y * -10}px`);
+      });
+      homeHero.addEventListener('pointerleave', () => {
+        heroImage.style.setProperty('--hero-depth-x', '0px');
+        heroImage.style.setProperty('--hero-depth-y', '0px');
+      });
+    }
     gsap.from('.hero-top, .hero .eyebrow', { y: 18, opacity: 0, duration: .8, stagger: .12, delay: .15 });
     gsap.from('.hero h1', { y: 65, opacity: 0, duration: 1.15, ease: 'power3.out', delay: .25 });
     gsap.from('.hero-supporting-copy span, .hero-side-message span, .hero .scroll-cue', { y: 22, opacity: 0, duration: .8, stagger: .16, delay: .8, ease: 'power3.out' });
@@ -111,6 +125,28 @@ document.addEventListener('DOMContentLoaded', () => {
       gsap.from(section.querySelectorAll('h2, h3, .eyebrow, p, ul, .package-meta, a, small'), { y: 32, opacity: 0, duration: .72, stagger: .06, ease: 'power2.out', scrollTrigger: { trigger: section, start: 'top 76%' } });
     });
     if (document.querySelector('.skill-area')) gsap.from('.skill-area', { opacity: 0, duration: .45, stagger: .06, ease: 'power2.out', scrollTrigger: { trigger: '.skill-areas', start: 'top 76%' } });
+  }
+
+  const serviceSkillAreas = [...document.querySelectorAll('.services-page .skill-area')];
+  if (serviceSkillAreas.length && window.matchMedia('(min-width: 761px)').matches) {
+    const activateSkillArea = activeCard => {
+      serviceSkillAreas.forEach(card => {
+        const active = card === activeCard;
+        card.classList.toggle('is-active', active);
+        card.setAttribute('aria-expanded', String(active));
+      });
+    };
+    serviceSkillAreas.forEach(card => {
+      card.addEventListener('click', () => activateSkillArea(card));
+      card.addEventListener('mouseenter', () => activateSkillArea(card));
+      card.addEventListener('focus', () => activateSkillArea(card));
+      card.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          activateSkillArea(card);
+        }
+      });
+    });
   }
 
   document.querySelectorAll('.panel:not(.final-cta):not(.about-panel):not(.services-panel)').forEach(section => {
