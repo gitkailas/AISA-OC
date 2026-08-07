@@ -95,3 +95,4 @@ footer .footer-brand{display:flex;flex-direction:row;align-items:center;gap:.12r
 .services-page .skill-area.personal,.services-page .skill-area.language,.services-page .skill-area.exam{background-position:center,center,center 15%!important}
 .services-page .skill-area.personal{background-position:center,center,center 42%!important}
 .services-page .skill-area.language{background-position:center,center,center 42%!important}
+@media(min-width:761px){.services-page .skill-area.personal.is-active{background-position:center,center,center calc(42% + 2cm)!important}}
