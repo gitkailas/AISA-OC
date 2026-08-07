@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (homeHero) {
     const heroImage = homeHero.querySelector('.hero-image');
+    const magneticZone = homeHero.querySelector('.hero-magnetic-zone');
+    const magneticButton = magneticZone?.querySelector('.hero-magnetic-button');
+    const magneticLabel = magneticButton?.querySelector('.magnetic-button-label');
     if (heroImage && window.matchMedia('(pointer: fine)').matches) {
       homeHero.addEventListener('pointermove', event => {
         const bounds = homeHero.getBoundingClientRect();
@@ -48,6 +51,19 @@ document.addEventListener('DOMContentLoaded', () => {
       homeHero.addEventListener('pointerleave', () => {
         heroImage.style.setProperty('--hero-depth-x', '0px');
         heroImage.style.setProperty('--hero-depth-y', '0px');
+      });
+    }
+    if (magneticZone && magneticButton && magneticLabel && window.matchMedia('(pointer: fine)').matches) {
+      magneticZone.addEventListener('pointermove', event => {
+        const bounds = magneticZone.getBoundingClientRect();
+        const x = (event.clientX - (bounds.left + bounds.width / 2)) * .28;
+        const y = (event.clientY - (bounds.top + bounds.height / 2)) * .28;
+        gsap.to(magneticButton, { x, y, duration: .4, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(magneticLabel, { x: x * .55, y: y * .55, duration: .4, ease: 'power2.out', overwrite: true });
+      });
+      magneticZone.addEventListener('pointerleave', () => {
+        gsap.to(magneticButton, { x: 0, y: 0, duration: .7, ease: 'elastic.out(1, .4)', overwrite: 'auto' });
+        gsap.to(magneticLabel, { x: 0, y: 0, duration: .7, ease: 'elastic.out(1, .4)', overwrite: true });
       });
     }
     gsap.from('.hero-top, .hero .eyebrow', { y: 18, opacity: 0, duration: .8, stagger: .12, delay: .15 });
