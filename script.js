@@ -189,8 +189,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       const name = contactForm.elements.name.value.trim();
-      status.textContent = `Thank you, ${name}. We will be in touch soon.`;
-      contactForm.reset();
+      const email = contactForm.elements.email.value.trim();
+      const message = contactForm.elements.message.value.trim();
+      const subject = encodeURIComponent(`Website enquiry from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message || 'No message provided.'}`);
+      status.textContent = 'Opening your email app to send the enquiry.';
+      window.location.href = `mailto:aisaglobalacademy@gmail.com?subject=${subject}&body=${body}`;
     });
   }
 });
